@@ -43,7 +43,22 @@ class Graph {
   }
 
   // this function returns an array of Node values using DFS
-  depthFirstSearch(start) {}
+  depthFirstSearch(start) {
+    const arrayOfVals = [start.value];
+
+    function recursiveDFS(start, seen = new Set([start])) {
+      for (let neighbor of start.adjacent) {
+        if (!seen.has(neighbor)) {
+          seen.add(neighbor);
+          arrayOfVals.push(neighbor.value);
+          recursiveDFS(neighbor, seen)
+        }
+      }
+    }
+
+    recursiveDFS(start);
+    return arrayOfVals;
+  }
 
   // this function returns an array of Node values using BFS
   breadthFirstSearch(start) {}
