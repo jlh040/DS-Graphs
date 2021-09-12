@@ -61,7 +61,23 @@ class Graph {
   }
 
   // this function returns an array of Node values using BFS
-  breadthFirstSearch(start) {}
+  breadthFirstSearch(start) {
+    const arrayOfVals = [start.value];
+    const toVisitQueue = [start];
+    const seen = new Set(toVisitQueue);
+
+    while (toVisitQueue.length) {
+      let current = toVisitQueue.shift();
+      for (let neighbor of current.adjacent) {
+        if (!seen.has(neighbor)) {
+          seen.add(neighbor);
+          arrayOfVals.push(neighbor.value);
+          toVisitQueue.push(neighbor);
+        }
+      }
+    }
+    return arrayOfVals;
+  }
 }
 
 module.exports = {Graph, Node}
